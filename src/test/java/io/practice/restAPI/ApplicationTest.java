@@ -67,7 +67,12 @@ public class ApplicationTest {
 	
 	public static List<ApprovedLoan> loanList= new ArrayList();
 	private  static MockMvc mockMvc ;
-
+	
+	
+	
+	/*
+	 * This setup function runs only ones due to setUpDone.
+	 */
 	@Before
 	public void setup() throws Exception {
 		
@@ -91,7 +96,15 @@ public class ApplicationTest {
 		setUpDone = true;
 			
 	}
-	/*checkAllExistingClients*/
+	
+	
+	
+	/*checkAllExistingClients
+	 *
+	 * The test checks if all loans saved during initialization are in the repository
+	 *
+	 */
+	
 	@Test
 	public void test1() throws Exception {
 		this.mockMvc.perform(get("/").accept(MediaType.APPLICATION_JSON_UTF8))
@@ -109,7 +122,11 @@ public class ApplicationTest {
 					    
 	}
 
-	/*checkClientsFromTheList*/
+	/*checkClientsFromTheList
+	 * 
+	 * This test checks if ApprovedLoans saved during initialization can be retrieved by ID 
+	 * 
+	 * */
 	@Test
 	public void test2() throws Exception {
 		
@@ -131,7 +148,11 @@ public class ApplicationTest {
 	    			.andExpect(jsonPath("$[0].countryCode", is(loanList.get(1).getCountryCode())));
 	}
 	
-	/*postingLoanApplication(*/
+	/*postingLoanApplication
+	 * 
+	 * This test checks if the application is capable of accepting loan applications
+	 * 
+	 * */
 	@Test
 	public void test3() throws Exception{
 	
@@ -150,7 +171,11 @@ public class ApplicationTest {
 	    
 	}
 	
-	/*checkAddingBlackListedClient*/
+	/*checkAddingBlackListedClient
+	 * 
+	 * This test checks if the application is capable of detecting black listed clients
+	 * 
+	 * */
 	@Test
 	public void test4() throws Exception{
 
@@ -162,7 +187,11 @@ public class ApplicationTest {
 	
 	
 	
-	/*checkMaxNumberOfRequestsPerSec*/
+	/*checkMaxNumberOfRequestsPerSec
+	 * 
+	 * This tests checks if 3 applications came from the same place during 1 second time frame.
+	 * 
+	 * */
 	@Test
 	public void test5() throws Exception{
 		
